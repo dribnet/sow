@@ -211,6 +211,7 @@
         extensions: [new deck.CollisionFilterExtension()],
     });
     
+    // FIX
     const imgLayer = new deck.BitmapLayer({
       id: 'bitmap-layer',
       bounds: [6.854155531128212, 0.9002620152064733, 20.214373597900106, 14.670129639761788],
@@ -226,6 +227,7 @@
       },
       controller: true,
       
+      // FIX
       layers: [imgLayer, pointLayer, labelLayer],
       
       
