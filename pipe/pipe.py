@@ -12,17 +12,19 @@ import io
 from sow.util import patch_aspect_ratio
 
 from pandas import read_csv
-d = read_csv("drag_train1_0_test1_points_label0.csv", header=None)
-word_data = d.values
-word_data = patch_aspect_ratio(word_data, 11/10, 'drag_train1_4_test1_render10b_extent.json')
+the_csv = read_csv("lpipe_train1_2_test1_points_label0.csv", header=None)
 
-f = open("drag_all_test_filtered.txt", "r")
+word_data = the_csv.values
+word_data = patch_aspect_ratio(word_data, 11/10, 'lpipe_train1_2_test3_render10b_extent.json')
+# print(word_data[:5, :])
+
+f = open("pipe_all_test_filtered.txt", "r")
 lines = f.readlines()
 word_labels = np.array(lines)
 
 fig, ax = datamapplot.create_plot(word_data)
 
-fig.savefig("drag_plot.png", bbox_inches="tight")
+fig.savefig("pipe_plot.png", bbox_inches="tight")
 
 plot = datamapplot.create_interactive_plot(
     word_data,
