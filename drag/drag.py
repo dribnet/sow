@@ -1,12 +1,6 @@
-# Ensure we don't generate large images for inline docs
-# You probably want to remove this if running the notebook yourself
 import matplotlib
-# matplotlib.rcParams["figure.dpi"] = 72
-
 import datamapplot
-
 import numpy as np
-import requests
 import io
 
 from sow.util import patch_aspect_ratio

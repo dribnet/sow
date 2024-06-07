@@ -1,17 +1,14 @@
-# Ensure we don't generate large images for inline docs
-# You probably want to remove this if running the notebook yourself
 import matplotlib
-# matplotlib.rcParams["figure.dpi"] = 72
-
 import datamapplot
-
 import numpy as np
-import requests
 import io
+
+from sow.util import patch_aspect_ratio
 
 from pandas import read_csv
 d = read_csv("delve_train1_2_test1_points_label0.csv", header=None)
 word_data = d.values
+word_data = patch_aspect_ratio(word_data, 11/10, 'delve_train1_2_test1_render10b_extent.json')
 
 f = open("delve_all_test_filtered.txt", "r")
 lines = f.readlines()
@@ -29,3 +26,8 @@ plot = datamapplot.create_interactive_plot(
 
 plot.save("output.html")
 
+# PYTHONPATH=.. python delve.py
+# cp output.html index.html
+# patch index.html index.patch
+
+# diff -u output.html index.html > index.patch

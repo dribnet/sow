@@ -1,0 +1,105 @@
+--- output.html	2024-06-03 23:49:01
++++ index.html	2024-06-05 23:05:52
+@@ -3,7 +3,7 @@
+ <html>
+   <head>
+     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+-    <title>Interactive Data Map</title>
++    <title>Shape of Words: Delve</title>
+     
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+\ No newline at end of file
+@@ -17,12 +17,30 @@
+     
+     <script src="https://unpkg.com/fflate@0.8.0"></script>
+     
++    <!-- META START -->
++
++  <meta property="og:title" content="Shape of Words: Delve" />
++  <meta name="twitter:title" content="Shape of Words: Delve" />
++  <meta name="description" content="An exploration of how language models contexutalise a single word" />
++  <meta property="og:description" content="An exploration of how language models contexutalise a single word" />
++  <meta name="twitter:description" content="An exploration of how language models contexutalise a single word" />
++  <meta property="og:type" content="website" />
++  <meta property="og:url" content="https://dribnet.github.io/sow/delve/" />
++  <meta property="og:image" content="https://dribnet.github.io/sow/delve/delve_preview.jpg" />
++  <meta name="twitter:image" content="https://dribnet.github.io/sow/delve/delve_preview.jpg" />
++  <meta property="og:image:width" content="1280" />
++  <meta property="og:image:height" content="720" />
++  <meta name="twitter:card" content="summary_large_image" />
++  <meta name="twitter:creator" content="@dribnet" />
++
++    <!-- META END -->
++
+     <style>
+         body {
+           margin: 0;
+           padding: 0;
+           overflow: hidden;
+-          background: #ffffff;
++          background: #040d21;
+         }
+ 
+         #deck-container {
+\ No newline at end of file
+@@ -32,7 +50,7 @@
+ 
+         #deck-container canvas {
+           z-index: 1;
+-          background: #ffffff;
++          background: #040d21;
+         }
+ 
+         .deck-tooltip {
+\ No newline at end of file
+@@ -122,14 +140,18 @@
+             return [data.src.x[index], data.src.y[index]];
+         },
+         
+-        getRadius: 0.1,
++        // FIX getRadius: 0.1,
++        getRadius: 0.08832793638777915,
+         
+         getFillColor: (object, {index, data}) => {
+             return [
+-                data.src.r[index], 
+-                data.src.g[index], 
+-                data.src.b[index],
+-                180
++                // FIX data.src.r[index], 
++                // data.src.g[index], 
++                // data.src.b[index],
++                // 180
++                200, 200,
++                150,
++                8
+             ]
+         },
+         getLineColor: (object, {index, data}) => {
+\ No newline at end of file
+@@ -189,6 +211,12 @@
+         extensions: [new deck.CollisionFilterExtension()],
+     });
+     
++    // FIX
++    const imgLayer = new deck.BitmapLayer({
++      id: 'bitmap-layer',
++      bounds: [6.854155531128212, 0.9002620152064733, 20.214373597900106, 14.670129639761788],
++      image: 'delve_7040_s43_coloring_02_gray_to_blue.jpg'
++    });
+ 
+     const deckgl = new deck.DeckGL({
+       container: container,
+\ No newline at end of file
+@@ -199,7 +227,8 @@
+       },
+       controller: true,
+       
+-      layers: [pointLayer, labelLayer],
++      // FIX
++      layers: [imgLayer, pointLayer, labelLayer],
+       
+       
+       getTooltip: ({index}) => hoverData.data.hover_text[index]
+\ No newline at end of file
