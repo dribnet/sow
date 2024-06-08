@@ -1,0 +1,104 @@
+--- output.html	2024-06-08 20:11:19
++++ index.html	2024-06-08 20:21:30
+@@ -3,7 +3,7 @@
+ <html>
+   <head>
+     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+-    <title>Interactive Data Map</title>
++    <title>Shape of Words: Bang</title>
+     
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+\ No newline at end of file
+@@ -17,12 +17,30 @@
+     
+     <script src="https://unpkg.com/fflate@0.8.0"></script>
+     
++    <!-- META START -->
++
++  <meta property="og:title" content="Shape of Words: Bang" />
++  <meta name="twitter:title" content="Shape of Words: Bang" />
++  <meta name="description" content="An exploration of how language models contexutalise a single word" />
++  <meta property="og:description" content="An exploration of how language models contexutalise a single word" />
++  <meta name="twitter:description" content="An exploration of how language models contexutalise a single word" />
++  <meta property="og:type" content="website" />
++  <meta property="og:url" content="https://dribnet.github.io/sow/bang/" />
++  <meta property="og:image" content="https://dribnet.github.io/sow/bang/bang_preview.jpg" />
++  <meta name="twitter:image" content="https://dribnet.github.io/sow/bang/bang_preview.jpg" />
++  <meta property="og:image:width" content="1280" />
++  <meta property="og:image:height" content="720" />
++  <meta name="twitter:card" content="summary_large_image" />
++  <meta name="twitter:creator" content="@dribnet" />
++
++    <!-- META END -->
++
+     <style>
+         body {
+           margin: 0;
+           padding: 0;
+           overflow: hidden;
+-          background: #ffffff;
++          background: #040d21;
+         }
+ 
+         #deck-container {
+\ No newline at end of file
+@@ -32,7 +50,7 @@
+ 
+         #deck-container canvas {
+           z-index: 1;
+-          background: #ffffff;
++          background: #040d21;
+         }
+ 
+         .deck-tooltip {
+\ No newline at end of file
+@@ -126,10 +144,13 @@
+         
+         getFillColor: (object, {index, data}) => {
+             return [
+-                data.src.r[index], 
+-                data.src.g[index], 
+-                data.src.b[index],
+-                180
++                // FIX data.src.r[index], 
++                // data.src.g[index], 
++                // data.src.b[index],
++                // 180
++                200, 200,
++                150,
++                8
+             ]
+         },
+         getLineColor: (object, {index, data}) => {
+\ No newline at end of file
+@@ -189,17 +210,24 @@
+         extensions: [new deck.CollisionFilterExtension()],
+     });
+     
++    // FIX
++    const imgLayer = new deck.BitmapLayer({
++      id: 'bitmap-layer',
++      bounds: [-9.489620530480101, -3.4925332750592912, 17.04886182534094, 20.633359775687104],
++      image: 'bang_7040_s34_coloring_03_gray_colored.jpg'
++    });
+ 
+     const deckgl = new deck.DeckGL({
+       container: container,
+       initialViewState: {
+-        latitude: 9.153290564891115,
+-        longitude: 2.3972839750554757,
+-        zoom: 4.087409814240853
++        latitude: 9,
++        longitude: 4.2,
++        zoom: 4.5
+       },
+       controller: true,
+       
+-      layers: [pointLayer, labelLayer],
++      // FIX
++      layers: [imgLayer, pointLayer, labelLayer],
+       
+       
+       getTooltip: ({index}) => hoverData.data.hover_text[index]
+\ No newline at end of file
