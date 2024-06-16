@@ -1,0 +1,103 @@
+--- output.html	2024-06-16 23:25:15
++++ index.html	2024-06-16 23:34:10
+@@ -3,7 +3,7 @@
+ <html>
+   <head>
+     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+-    <title>Interactive Data Map</title>
++    <title>Shape of Words: Loss</title>
+     
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+\ No newline at end of file
+@@ -17,12 +17,30 @@
+     
+     <script src="https://unpkg.com/fflate@0.8.0"></script>
+     
++    <!-- META START -->
++
++  <meta property="og:title" content="Shape of Words: Loss" />
++  <meta name="twitter:title" content="Shape of Words: Loss" />
++  <meta name="description" content="An exploration of how language models contexutalise a single word" />
++  <meta property="og:description" content="An exploration of how language models contexutalise a single word" />
++  <meta name="twitter:description" content="An exploration of how language models contexutalise a single word" />
++  <meta property="og:type" content="website" />
++  <meta property="og:url" content="https://dribnet.github.io/sow/loss/" />
++  <meta property="og:image" content="https://dribnet.github.io/sow/loss/loss_preview.jpg" />
++  <meta name="twitter:image" content="https://dribnet.github.io/sow/loss/loss_preview.jpg" />
++  <meta property="og:image:width" content="1280" />
++  <meta property="og:image:height" content="720" />
++  <meta name="twitter:card" content="summary_large_image" />
++  <meta name="twitter:creator" content="@dribnet" />
++
++    <!-- META END -->
++
+     <style>
+         body {
+           margin: 0;
+           padding: 0;
+           overflow: hidden;
+-          background: #ffffff;
++          background: #040d21;
+         }
+ 
+         #deck-container {
+\ No newline at end of file
+@@ -32,7 +50,7 @@
+ 
+         #deck-container canvas {
+           z-index: 1;
+-          background: #ffffff;
++          background: #040d21;
+         }
+ 
+         .deck-tooltip {
+\ No newline at end of file
+@@ -126,10 +144,13 @@
+         
+         getFillColor: (object, {index, data}) => {
+             return [
+-                data.src.r[index], 
+-                data.src.g[index], 
+-                data.src.b[index],
+-                180
++                // FIX data.src.r[index], 
++                // data.src.g[index], 
++                // data.src.b[index],
++                // 180
++                200, 200,
++                150,
++                8
+             ]
+         },
+         getLineColor: (object, {index, data}) => {
+\ No newline at end of file
+@@ -189,17 +210,23 @@
+         extensions: [new deck.CollisionFilterExtension()],
+     });
+     
++    // FIX
++    const imgLayer = new deck.BitmapLayer({
++      id: 'bitmap-layer',
++      bounds: [-6.155939566361134, -3.1906983511788503, 18.445531117188157, 19.174274997502323],
++      image: 'loss_8800_s43_ds_01_50p.jpg'
++    });
+ 
+     const deckgl = new deck.DeckGL({
+       container: container,
+       initialViewState: {
+-        latitude: 10.486213592027052,
+-        longitude: 6.142356881560856,
+-        zoom: 4.1967511216599815
++        latitude: 10,
++        longitude: 6,
++        zoom: 5,
+       },
+       controller: true,
+       
+-      layers: [pointLayer, labelLayer],
++      layers: [imgLayer, pointLayer, labelLayer],
+       
+       
+       getTooltip: ({index}) => hoverData.data.hover_text[index]
+\ No newline at end of file
